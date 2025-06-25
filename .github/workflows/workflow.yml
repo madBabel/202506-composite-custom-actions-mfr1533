@@ -17,6 +17,5 @@ jobs:
       - name: Build Node
         uses: ./.github/actions/composite-deps
         with:
-          inputs: 
             working-dir:  ${{ env.WORK_DIR }}
             node-version:  ${{ env.NODE_VERSION }}
