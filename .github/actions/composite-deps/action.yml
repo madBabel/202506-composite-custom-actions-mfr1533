@@ -1,28 +1,25 @@
 name: Composite Action
 description: "My custom Action"
+inputs:
+  working-dir:
+    default: "."
+  node-version:
+    default: "."
 
 runs:
   using: composite
+  defaults:
+    shell: bash
+    
+  runs-on: ubuntu-latest
   working-directory: ${{ inputs.working-dir }}
   steps:
-    - name: Checkout
-      env:
-        MY_ENV_VAR: "Hello, World! Step 1"
-      shell: bash
-      run:
-          |
-          echo "The value of MY_ENV_VAR is $MY_ENV_VAR"       
-      
-    - name: Entorno ${{inputs.entorno}}
-      shell: bash
-      run:
-          |
-          echo "This step runs in entorno ${{inputs.entorno}}"
     - name: Setup Node
-        uses: actions/setup-node@v4
+      shell: bash
+      uses: actions/setup-node@v4
         with:
-          node-version: ${{env.NODE_VERSION}}
+          node-version: ${{inputs.node-version }}
     - name: Install Dependencies
-        run: npm ci
+      run: npm ci
     - name: Run Unit Tests
-        run: npm run test
+      run: npm run test
