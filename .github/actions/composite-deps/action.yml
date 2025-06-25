@@ -10,18 +10,17 @@ inputs:
 
 runs:
   using: composite
-  defaults:
-    shell: bash
-
   runs-on: ubuntu-latest
-  working-directory: ${{ inputs.working-dir }}
   steps:
     - name: Setup Node
-      shell: bash
       uses: actions/setup-node@v4
         with:
           node-version: ${{inputs.node-version }}
     - name: Install Dependencies
+      shell: bash
+      working-directory: ${{ inputs.working-dir }}
       run: npm ci
     - name: Run Unit Tests
+      shell: bash
+      working-directory: ${{ inputs.working-dir }}
       run: npm run test
