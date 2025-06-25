@@ -3,7 +3,7 @@ description: "My custom Action"
 
 runs:
   using: composite
-  working
+  working-directory: ${{ inputs.working-dir }}
   steps:
     - name: Checkout
       env:
