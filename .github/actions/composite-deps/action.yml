@@ -1,0 +1,28 @@
+name: Composite Action
+description: "My custom Action"
+
+runs:
+  using: composite
+  working
+  steps:
+    - name: Checkout
+      env:
+        MY_ENV_VAR: "Hello, World! Step 1"
+      shell: bash
+      run:
+          |
+          echo "The value of MY_ENV_VAR is $MY_ENV_VAR"       
+      
+    - name: Entorno ${{inputs.entorno}}
+      shell: bash
+      run:
+          |
+          echo "This step runs in entorno ${{inputs.entorno}}"
+    - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{env.NODE_VERSION}}
+    - name: Install Dependencies
+        run: npm ci
+    - name: Run Unit Tests
+        run: npm run test
