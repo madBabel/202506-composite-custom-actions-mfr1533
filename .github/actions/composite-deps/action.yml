@@ -2,15 +2,17 @@ name: Composite Action
 description: "My custom Action"
 inputs:
   working-dir:
+    description: "a"
     default: "."
   node-version:
+    description: "b"
     default: "."
 
 runs:
   using: composite
   defaults:
     shell: bash
-    
+
   runs-on: ubuntu-latest
   working-directory: ${{ inputs.working-dir }}
   steps:
